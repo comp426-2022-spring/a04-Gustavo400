@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 var argv = require('minimist')(process.argv.slice(2));
 console.log(argv);
-console.log(argv.port);
+console.log(argv.help);
 
 // Start an app server
 let portNumber = argv.port ? parseInt(argv.port) : 5000;
