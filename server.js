@@ -3,8 +3,12 @@ const coin = require("./modules/coin.js");
 const express = require('express');
 const app = express();
 var argv = require('minimist')(process.argv.slice(2));
-console.log(argv);
-console.log(argv.help);
+
+//help documentation
+if (argv.help) {
+    console.log("print help");
+    process.exit(0);
+}
 
 // Start an app server
 let portNumber = argv.port ? parseInt(argv.port) : 5000;
