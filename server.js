@@ -61,7 +61,8 @@ app.get('/app/', (req, res) => {
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end(res.statusCode+ ' ' +res.statusMessage)
 
-        console.log(fondle(req, res));
+        //console.log(fondle(req, res));
+        database.insertRow(fondle(req, res));
 });
 
 //One flip
