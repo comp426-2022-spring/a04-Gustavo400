@@ -72,6 +72,8 @@ app.get('/app/flip/', (req, res) => {
     res.statusMessage = 'OK';
     res.set({"Content-Type": "text/json"});
     res.json(result);
+
+    database.insertRow(fondle(req, res));
 });
 
 //Multiple flips
@@ -84,6 +86,8 @@ app.get('/app/flips/:number', (req, res) => {
     res.statusMessage = 'OK';
     res.set({"Content-Type": "text/json"});
     res.json(result);
+
+    database.insertRow(fondle(req, res));
 });
 
 //Call and flip
@@ -94,9 +98,13 @@ app.get('/app/flip/call/:call', (req, res) => {
     res.statusMessage = 'OK';
     res.set({"Content-Type": "text/json"});
     res.json(result);
+
+    database.insertRow(fondle(req, res));
 });
 
 // Default response for any other request
 app.use(function(req, res){
     res.status(404).send('404 NOT FOUND')
+
+    database.insertRow(fondle(req, res));
 });
