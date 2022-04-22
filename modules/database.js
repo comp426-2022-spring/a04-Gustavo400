@@ -19,7 +19,6 @@ function initDatabase() {
                             referer TEXT,
                             useragent TEXT
                         );`;
-
     db.exec(createTable);
 }
 
