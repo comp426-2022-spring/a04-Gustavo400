@@ -32,6 +32,35 @@ const server = app.listen(portNumber, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',portNumber))
 });
 
+// Grab info to add to database
+function fondle(req, res) {
+    const logdata = {
+        "remoteaddr": req.ip,
+        "remoteuser": req.user,
+        "time": Date.now(),
+        "method": req.method,
+        "url": req.url,
+        "protocol": req.protocol,
+        "httpversion": req.httpVersion,
+        "status": res.statusCode,
+        "referer": req.headers['referer'],
+        "useragent": req.headers['user-agent']
+    }
+
+    return logdata;
+}
+
+app.get('/app/', (req, res) => {
+    // Respond with status 200
+        res.statusCode = 200;
+    // Respond with status message "OK"
+        res.statusMessage = 'OK';
+        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+        res.end(res.statusCode+ ' ' +res.statusMessage)
+
+        console.log(fondle(req, res));
+});
+
 //One flip
 app.get('/app/flip/', (req, res) => {
     const result = {"flip" : coin.coinFlip()};
@@ -61,15 +90,6 @@ app.get('/app/flip/call/:call', (req, res) => {
     res.statusMessage = 'OK';
     res.set({"Content-Type": "text/json"});
     res.json(result);
-});
-
-app.get('/app/', (req, res) => {
-    // Respond with status 200
-        res.statusCode = 200;
-    // Respond with status message "OK"
-        res.statusMessage = 'OK';
-        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
-        res.end(res.statusCode+ ' ' +res.statusMessage)
 });
 
 // Default response for any other request
