@@ -17,7 +17,7 @@ function initDatabase() {
                             "httpversion" TEXT,
                             "status" INTEGER,
                             "referer" TEXT,
-                            "useragent" TEXT,
+                            "useragent" TEXT
                         );`;
 
     db.exec(createTable);
