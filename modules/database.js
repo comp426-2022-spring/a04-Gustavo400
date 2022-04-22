@@ -36,16 +36,16 @@ function insertRow(logdata) {
                         referer,
                         useragent
                     ) VALUES (
-                        ${logdata.remoteaddr},
-                        ${logdata.remoteuser},
+                        "${logdata.remoteaddr}",
+                        "${logdata.remoteuser}",
                         ${logdata.time},
-                        ${logdata.method},
-                        ${logdata.url},
-                        ${logdata.protocol},
-                        ${logdata.httpversion},
+                        "${logdata.method}",
+                        "${logdata.url}",
+                        "${logdata.protocol}",
+                        "${logdata.httpversion}",
                         ${logdata.status},
-                        ${logdata.referer},
-                        ${logdata.useragent}
+                        "${logdata.referer}",
+                        "${logdata.useragent}"
                     );`;
     db.exec(insert);
 }
