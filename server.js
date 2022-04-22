@@ -1,5 +1,6 @@
 // Require Express.js
 const coin = require("./modules/coin.js");
+const database = require("./modules/database");
 const express = require('express');
 const app = express();
 var argv = require('minimist')(process.argv.slice(2));
@@ -30,6 +31,8 @@ if (argv.help) {
 let portNumber = argv.port ? parseInt(argv.port) : 5000;
 const server = app.listen(portNumber, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',portNumber))
+    database.initDatabase();
+    console.log("Created database");
 });
 
 // Grab info to add to database
