@@ -21,7 +21,6 @@ function initDatabase() {
                         );`;
 
     db.exec(createTable);
-
 }
 
 module.exports = { initDatabase };
