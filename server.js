@@ -4,6 +4,8 @@ const database = require("./modules/database");
 const express = require('express');
 const app = express();
 var argv = require('minimist')(process.argv.slice(2));
+const morgan = require("morgan");
+const fs = require("fs");
 
 //help documentation
 const help = 
@@ -36,6 +38,16 @@ const server = app.listen(portNumber, () => {
     console.log("Created database");
 });
 
+// Logging to file if "--log=true"
+if(argv.log !== "false") {
+    console.log("LOGGING = TRUE")
+    const accesslog = fs.createWriteStream('access.log', { flags: 'a'});
+    app.use(morgan("combined", { stream: accesslog }));
+
+} else{
+    console.log("LOGGING = FALSE")
+}
+
 // Debug endpoints only if debug flag is true
 if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
     console.log("DEBUGGING = TRUE");
@@ -57,12 +69,7 @@ if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
     console.log("DEBUGGING = FALSE");
 }
 
-// Logging to file if "--log=true"
-if(argv.log !== "false") {
-    console.log("LOGGING = TRUE")
-} else{
-    console.log("LOGGING = FALSE")
-}
+
 
 // Grab info to add to database
 function fondle(req, res) {
