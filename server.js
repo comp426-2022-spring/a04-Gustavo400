@@ -45,7 +45,7 @@ if(argv.log !== "false") {
     app.use(morgan("combined", { stream: accesslog }));
 
 } else{
-    console.log("LOGGING = FALSE")
+    console.log("LOGGING = FALSE");
 }
 
 // Debug endpoints only if debug flag is true
