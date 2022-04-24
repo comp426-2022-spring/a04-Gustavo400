@@ -37,12 +37,13 @@ const server = app.listen(portNumber, () => {
 });
 
 // Debug endpoints only if debug flag is true
-if(argv.debug === "true" || argv.deeznuts) {
+if(argv.debug === "true" || argv.debug === true || argv.deeznuts) {
+    console.log("DEBUGGING = TRUE");
     // /app/error test endpoint
     app.get('/app/error/', (req,res) => {
         database.insertRow(fondle(req, res));
         throw new Error('Error test successful')
-    })
+    });
 
     app.get('/app/log/access/', (req,res) => {
         const result = database.getAll();
@@ -51,7 +52,16 @@ if(argv.debug === "true" || argv.deeznuts) {
         res.set({"Content-Type": "text/json"});
         res.json(result);
         database.insertRow(fondle(req, res));
-    })
+    });
+} else {
+    console.log("DEBUGGING = FALSE");
+}
+
+// Logging to file if "--log=true"
+if(argv.log !== "false") {
+    console.log("LOGGING = TRUE")
+} else{
+    console.log("LOGGING = FALSE")
 }
 
 // Grab info to add to database
