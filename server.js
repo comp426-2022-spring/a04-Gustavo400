@@ -38,7 +38,20 @@ const server = app.listen(portNumber, () => {
 
 // Debug endpoints only if debug flag is true
 if(argv.debug || argv.deeznuts) {
-    
+    // /app/error test endpoint
+    app.get('/app/error/', (req,res) => {
+        database.insertRow(fondle(req, res));
+        throw new Error('Error test successful')
+    })
+
+    app.get('/app/log/access/', (req,res) => {
+        const result = database.getAll();
+        res.statusCode = 200;
+        res.statusMessage = 'OK';
+        res.set({"Content-Type": "text/json"});
+        res.json(result);
+        database.insertRow(fondle(req, res));
+    })
 }
 
 // Grab info to add to database

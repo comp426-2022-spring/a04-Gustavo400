@@ -49,5 +49,11 @@ function insertRow(logdata) {
     db.exec(insert);
 }
 
+// Get all rows for download
+function getAll() {
+    const select = db.prepare(`SELECT * FROM accesslog`);
+    return select.all();
+}
+
 // Export functions
-module.exports = { initDatabase, insertRow };
+module.exports = { initDatabase, insertRow, getAll };
