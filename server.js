@@ -37,7 +37,7 @@ const server = app.listen(portNumber, () => {
 });
 
 // Debug endpoints only if debug flag is true
-if(argv.debug || argv.deeznuts) {
+if(argv.debug === "true" || argv.deeznuts) {
     // /app/error test endpoint
     app.get('/app/error/', (req,res) => {
         database.insertRow(fondle(req, res));
