@@ -9,7 +9,7 @@ var argv = require('minimist')(process.argv.slice(2));
 const help = 
 (`server.js [options]
 
---por       Set the port number for the server to listen on. Must be an integer
+--port       Set the port number for the server to listen on. Must be an integer
             between 1 and 65535.
 
 --debug     If set to true, creates endlpoints /app/log/access/ which returns
@@ -22,7 +22,8 @@ const help =
 
 --help      Return this message and exit.`);
 
-if (argv.help) {
+// Check for --help or --h parameters
+if (argv.help || argv.h) {
     console.log(help);
     process.exit(0);
 }
@@ -34,6 +35,11 @@ const server = app.listen(portNumber, () => {
     database.initDatabase();
     console.log("Created database");
 });
+
+// Debug endpoints only if debug flag is true
+if(argv.debug || argv.deeznuts) {
+    
+}
 
 // Grab info to add to database
 function fondle(req, res) {
